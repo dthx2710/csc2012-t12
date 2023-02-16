@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables file
+.env
+.env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+
+# Next.js build output
+.next
+
+node_modules/
+user-service/dist
+user-service/.env
+/.idea/
+config_env/user-service.env
+.DS_Store
+
+!config_env/*.env
+config_env/secrets*.env
+key.pem
+cert.pem
+k8s/secrets.yaml
+k8s/secrets*.yaml

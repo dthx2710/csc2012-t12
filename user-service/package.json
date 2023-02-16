@@ -1,0 +1,16 @@
+{
+  "name": "user-service",
+  "version": "1.0.0",
+  "description": "Service for User Authentication, User Info, and Reward points",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node client.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/proto-loader": "^0.7.5",
+    "grpc": "^1.24.11"
+  }
+}

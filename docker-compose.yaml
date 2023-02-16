@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user-service
+      - image-service
+    networks:
+      - app-network
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "50051:50051"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  image-service:
+    build: ./image-service
+    ports:
+      - "50052:50052"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
