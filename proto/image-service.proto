@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package image_service;
+
+service Image{
+    rpc ComputerVision(CVRequest) returns (CVResponse) {}
+}
+
+message CVRequest{
+    string type = 1;
+}
+
+message CVResponse{
+    bool result = 1;
+}
