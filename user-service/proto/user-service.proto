@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+service User{
+    rpc LoginUser(LoginRequest) returns (LoginResponse) {}
+    rpc GetInfo(InfoRequest) returns (InfoResponse) {}
+    rpc GetReward(RewardRequest) returns (RewardResponse) {}
+}
+
+message LoginRequest{
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse{
+    string id = 1;
+}
+
+message InfoRequest{
+    string id = 1;
+}
+
+message InfoResponse{
+    string username = 1;
+    string name = 2;
+    int32 points = 3;
+}
+
+message RewardRequest{
+    string id = 1;
+    int32 points = 2;
+}
+
+message RewardResponse{
+    bool success = 1;
+}
