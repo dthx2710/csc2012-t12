@@ -6,7 +6,7 @@ Name | Student ID | Role | Github
 --- | --- | --- | ---
 **Dylan Tok Hong Xun** | 2101372 | gRPC Gateway & Backend Lead | [@dthx2710](https://github.com/dthx2710)
 **Derick** | | | 
-**Yee Kit** | | | 
+**Yee Kit** | 2100649 | Frontend Lead | [@xKhronoz](https://github.com/xKhronoz)
 **Xiang Hui** | | | 
 **Xun Thong** | | | 
 **Sing Thai** | | | 
