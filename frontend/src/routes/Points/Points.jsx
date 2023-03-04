@@ -1,5 +1,6 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Link } from "react-router-dom";
 import React from 'react';
 import {
   MDBBtn,
@@ -13,9 +14,9 @@ import {
   MDBCheckbox
 }
 from 'mdb-react-ui-kit';
-import './App.css';
+import './Points.css';
 
-function App() {
+function Points() {
   return (
     <MDBContainer fluid>
 
@@ -59,4 +60,4 @@ function App() {
   );
 }
 
-export default App;
+export default Points;
