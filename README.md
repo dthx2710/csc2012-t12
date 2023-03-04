@@ -5,7 +5,7 @@ CSC2012 T12 Project - Smart recycling with Cloud native microservices - decoupli
 Name | Student ID | Role | Github
 --- | --- | --- | ---
 **Dylan Tok Hong Xun** | 2101372 | gRPC Gateway & Backend Lead | [@dthx2710](https://github.com/dthx2710)
-**Derick** | | | 
+**Derick** | 2100689 | Frontend Developer | [@zyferis](https://github.com/zyferis)
 **Yee Kit** | 2100649 | Frontend Lead | [@xKhronoz](https://github.com/xKhronoz)
 **Xiang Hui** | | | 
 **Xun Thong** | | | 
