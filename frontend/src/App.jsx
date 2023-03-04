@@ -1,34 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import React from 'react';
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBIcon,
+  MDBCheckbox
+}
+from 'mdb-react-ui-kit';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <MDBContainer fluid>
+
+      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+        <MDBCol col='12'>
+
+          <MDBCard className='bg-white my-5 mx-auto' style={{borderRadius: '1rem', maxWidth: '500px'}}>
+            <MDBCardBody className='p-5 w-100 d-flex flex-column'>
+
+              <h2 className="fw-bold mb-2 text-center">Sign in</h2>
+              <p className="text-white-50 mb-3">Please enter your login and password!</p>
+
+              <MDBInput wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg"/>
+              <MDBInput wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg"/>
+
+              <MDBCheckbox name='flexCheck' id='flexCheckDefault' className='mb-4' label='Remember password' />
+
+              <MDBBtn size='lg'>
+                Login
+              </MDBBtn>
+
+              <hr className="my-4" />
+
+              <MDBBtn className="mb-2 w-100" size="lg" style={{backgroundColor: '#dd4b39'}}>
+                <MDBIcon fab icon="google" className="mx-2"/>
+                Sign in with google
+              </MDBBtn>
+
+              <MDBBtn className="mb-4 w-100" size="lg" style={{backgroundColor: '#3b5998'}}>
+                <MDBIcon fab icon="facebook-f" className="mx-2"/>
+                Sign in with facebook
+              </MDBBtn>
+
+            </MDBCardBody>
+          </MDBCard>
+
+        </MDBCol>
+      </MDBRow>
+
+    </MDBContainer>
+  );
 }
 
-export default App
+export default App;
