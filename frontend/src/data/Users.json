@@ -1,0 +1,16 @@
+{
+  "userData": [
+    {
+      "id": 0,
+      "username": "user1@gmail.com",
+      "password": "password123",
+      "name": "User 1"
+    },
+    {
+      "id": 1,
+      "username": "user2@gmail.com",
+      "password": "password234",
+      "name": "User 2"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   MDBBtn,
   MDBContainer,
@@ -15,14 +15,16 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Login.css';
+import userData from '../../data/Users.json'
 
 function Login() {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authenticated, setAuthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
 
-
+  /*
   const users = [
     {
       username: '',
@@ -36,8 +38,9 @@ function Login() {
       username: 'user2@gmail.com',
       password: 'password234'
     },
-  ];
+  ];*/
 
+  /*
   const handleSubmit = (e) => {
     e.preventDefault()
     const acc = users.find((user) => user.username === username);
@@ -46,7 +49,21 @@ function Login() {
       localStorage.setItem('authenticated', true);
       navigate('/home', { replace: true });
     }
+  }*/
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    function checkCredentials(username, password){
+      const user = userData.userData.find(user => user.username === username && user.password === password);
+      if (user) {
+        setAuthenticated(true)
+        localStorage.setItem('authenticated', true);
+        navigate('/home', { replace: true });
+      }
+    }
+    checkCredentials(username, password);
   }
+
 
   return (
     <MDBContainer fluid>
