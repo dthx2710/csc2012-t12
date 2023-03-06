@@ -8,7 +8,7 @@ Name | Student ID | Role | Github
 **Derick** | 2100689 | Frontend Developer | [@zyferis](https://github.com/zyferis)
 **Yee Kit** | 2100649 | Frontend Lead | [@xKhronoz](https://github.com/xKhronoz)
 **Xiang Hui** | | | 
-**Xun Thong** | | | 
+**Xun Thong** | 2102436 | Frontend Developer | [@xunthongkkkkkk](https://github.com/xunthongkkkkkk)
 **Sing Thai** | | | 
 
 ## Simple Startup Steps
