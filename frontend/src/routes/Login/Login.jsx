@@ -19,46 +19,38 @@ import userData from '../../data/Users.json'
 
 function Login() {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
 
-  /*
-  const users = [
-    {
-      username: '',
-      password: ''
-    },
-    {
-      username: 'user1@gmail.com',
-      password: 'password123'
-    },
-    {
-      username: 'user2@gmail.com',
-      password: 'password234'
-    },
-  ];*/
+  //const fs = require('fs'); // Import the File System module
+  //const users = require('../../data/Users.json');
 
-  /*
   const handleSubmit = (e) => {
     e.preventDefault()
-    const acc = users.find((user) => user.username === username);
-    if (acc && acc.password === password) {
-      setAuthenticated(true)
-      localStorage.setItem('authenticated', true);
-      navigate('/home', { replace: true });
-    }
-  }*/
-  
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    function checkCredentials(username, password){
-      const user = userData.userData.find(user => user.username === username && user.password === password);
-      if (user) {
-        setAuthenticated(true)
-        localStorage.setItem('authenticated', true);
-        navigate('/home', { replace: true });
+    function checkCredentials(username, password) {
+      const currentUser = userData.userData.find(user => user.username === username && user.password === password);
+      if (currentUser) {
+        alert('User logged in successfully.');
+
+        /*
+        axios.put("http://localhost:3001/userData/" + currentUser.id, {
+          id: currentUser.id,
+          username: currentUser.username,
+          password: currentUser.password,
+          name: currentUser.name,
+          login: true,
+        }).then((response) => {
+          console.log(response.status, response.data.token);
+        }).catch((error) => {
+          console.error(error);
+        });*/
+
+        // Navigate to homepage
+        window.location.href = "/Home";
+        //navigate('/home', { replace: true });
+      } else {
+        // Show an error message if the email and password do not match any user
+        alert("Invalid email or password. Please try again.");
       }
     }
     checkCredentials(username, password);

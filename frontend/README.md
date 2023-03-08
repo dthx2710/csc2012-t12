@@ -5,3 +5,8 @@
 - Run ``` docker run -d -p 3000:3000 --name frontend_docker frontend```
 - Run ```docker ps``` to ensure that service ```frontend_docker``` is running
 - Run app by visiting ```http://localhost:3000```
+
+## To Login and Update Profile
+- Ensure Users.json is loading
+- cd frontend
+- Run $json-server --watch ./src/data/Users.json --port 3001
