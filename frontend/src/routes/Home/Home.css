@@ -44,3 +44,41 @@
 body {
   background-color: #ceeeed;
 }
+
+.bg-green {
+  background-color: #90cb81;
+}
+
+.text-left {
+  text-align: left;
+  font-size: 2em;
+  color: black;
+  font-weight: 500;
+}
+
+.text-black-med {
+  text-align: left;
+  font-size: 1.1em;
+  color: black;
+  font-weight: 500;
+}
+
+.text-right-small {
+  text-align: right;
+  font-size: 0.95em;
+  font-weight: 500;
+  color: black;
+}
+
+.vh75width {
+  width: 75vh;
+}
+
+.vw75width {
+  width: 75vw;
+}
+
+.logo-small {
+  height: 2em;
+  padding-right: 2px;
+}

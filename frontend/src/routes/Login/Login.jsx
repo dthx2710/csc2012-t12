@@ -1,6 +1,7 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import {
   MDBBtn,
@@ -15,50 +16,50 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Login.css';
-import userData from '../../data/Users.json'
+//import userData from '../../data/Users.json'
+import userData from '../../../../user-service/data/users.json'
+import logo from '/recycling.svg';
 
 function Login() {
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [authenticated, setAuthenticated] = useState(localStorage.getItem(localStorage.getItem("authenticated") || false));
 
-  /*
-  const users = [
-    {
-      username: '',
-      password: ''
-    },
-    {
-      username: 'user1@gmail.com',
-      password: 'password123'
-    },
-    {
-      username: 'user2@gmail.com',
-      password: 'password234'
-    },
-  ];*/
+  //const fs = require('fs'); // Import the File System module
+  //const users = require('../../data/Users.json');
 
-  /*
   const handleSubmit = (e) => {
     e.preventDefault()
-    const acc = users.find((user) => user.username === username);
-    if (acc && acc.password === password) {
-      setAuthenticated(true)
-      localStorage.setItem('authenticated', true);
-      navigate('/home', { replace: true });
-    }
-  }*/
-  
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    function checkCredentials(username, password){
-      const user = userData.userData.find(user => user.username === username && user.password === password);
-      if (user) {
-        setAuthenticated(true)
-        localStorage.setItem('authenticated', true);
-        navigate('/home', { replace: true });
+    function checkCredentials(username, password) {
+
+      const currentUser = userData.userData.find(user =>
+        user.username === username && user.password === password);
+
+        
+      if (currentUser) {
+        userData.userData = currentUser;
+        alert('User logged in successfully.');
+        // Update database
+        axios.put("http://localhost:3001/userData/" + currentUser.id, {
+          id: currentUser.id,
+          username: currentUser.username,
+          password: currentUser.password,
+          name: currentUser.name,
+          currentpoints: currentUser.currentpoints,
+          lifetimepoints: currentUser.lifetimepoints,
+          login: true,
+        }).then((response) => {
+          alert(response.status, response.data.token);
+        });
+
+        // Navigate to homepage
+        window.location.href = "/Home";
+
+        //navigate('/home', { replace: true });
+      } else {
+        // Show an error message if the email and password do not match any user
+        alert("Invalid email or password. Please try again.");
       }
     }
     checkCredentials(username, password);
@@ -74,8 +75,9 @@ function Login() {
           <MDBCard className='bg-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '500px' }}>
             <MDBCardBody className='p-5 w-100 d-flex flex-column'>
               <form onSubmit={handleSubmit}>
-                <h2 className="fw-bold mb-2 text-center">Sign in</h2>
-                <p className="text-white-50 mb-3">Please enter your login and password!</p>
+                <img src={logo} alt="logo" className="logo" />
+                <h2 className="fw-bold mb-2 text-center">Recycle Smart</h2>
+                <p className="text-black-50 mb-3">Please enter your email and password!</p>
 
                 <MDBInput wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <MDBInput wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg" value={password} onChange={(e) => setPassword(e.target.value)} />

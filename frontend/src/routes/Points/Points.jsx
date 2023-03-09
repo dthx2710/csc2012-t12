@@ -26,6 +26,7 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Points.css';
+import NavBar from '../NavBar/NavBar'
 
 function Points() {
   const [basicActive, setBasicActive] = useState('tab1');

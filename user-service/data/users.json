@@ -1,37 +1,48 @@
-[
-  {
-    "id": "1",
-    "username": "jdoe",
-    "password": "password",
-    "name": "John Doe",
-    "points": 300
-  },
-  {
-    "id": "2",
-    "username": "jane",
-    "password": "password",
-    "name": "Jane Doe",
-    "points": 200
-  },
-  {
-    "id": "3",
-    "username": "joe",
-    "password": "password",
-    "name": "Joe Doe",
-    "points": 100
-  },
-  {
-    "id": "4",
-    "username": "jim",
-    "password": "password",
-    "name": "Jim Doe",
-    "points": 50
-  },
-  {
-    "id": "5",
-    "username": "jack",
-    "password": "password",
-    "name": "Jack Doe",
-    "points": 200
-  }
-]
+{
+  "userData": [
+    {
+      "id": "1",
+      "username": "jdoe@gmail.com",
+      "password": "password",
+      "name": "John Doe",
+      "lifetimepoints": 6000,
+      "login": true
+    },
+    {
+      "id": "2",
+      "username": "jane@gmail.com",
+      "password": "password",
+      "name": "Jane Doe",
+      "points": 200,
+      "lifetimepoints": 4000,
+      "login": false
+    },
+    {
+      "id": "3",
+      "username": "joe@gmail.com",
+      "password": "password",
+      "name": "Joe Doe",
+      "points": 100,
+      "lifetimepoints": 4000,
+      "login": false
+    },
+    {
+      "id": "4",
+      "username": "jim@gmail.com",
+      "password": "password",
+      "name": "Jim Doe",
+      "points": 50,
+      "lifetimepoints": 3000,
+      "login": false
+    },
+    {
+      "id": "5",
+      "username": "jack@gmail.com",
+      "password": "password",
+      "name": "Jack Doe",
+      "points": 200,
+      "lifetimepoints": 5000,
+      "login": false
+    }
+  ]
+}
