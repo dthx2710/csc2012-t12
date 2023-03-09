@@ -15,50 +15,31 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Points.css';
+import NavBar from '../NavBar/NavBar'
 
 function Points() {
   return (
-    <><MDBContainer fluid>
+    <>
+      <MDBContainer fluid>
 
-      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
-        <MDBCol col='12'>
+        <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+          <MDBCol col='12'>
 
-          <MDBCard className='bg-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '500px' }}>
-            <MDBCardBody className='p-5 w-100 d-flex flex-column'>
+            <MDBCard className='bg-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '500px' }}>
+              <MDBCardBody className='p-5 w-100 d-flex flex-column'>
 
-              <h2 className="fw-bold mb-2 text-center">This is Points Page</h2>
+                <h2 className="fw-bold mb-2 text-center">This is Points Page</h2>
 
-            </MDBCardBody>
-          </MDBCard>
+              </MDBCardBody>
+            </MDBCard>
 
-        </MDBCol>
-      </MDBRow>
+          </MDBCol>
+        </MDBRow>
 
-    </MDBContainer>
-    
-    <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF' }}>
-        <MDBContainer fluid>
-          <MDBNavbarBrand>
-            <MDBIcon fas icon="home" />
-            <MDBNavbarLink href='/home'>Home</MDBNavbarLink>
-          </MDBNavbarBrand>
+      </MDBContainer>
 
-          <MDBNavbarBrand>
-            <MDBIcon fas icon="recycle" />
-            <MDBNavbarLink href='/nearme'>Near Me</MDBNavbarLink>
-          </MDBNavbarBrand>
-
-          <MDBNavbarBrand>
-            <MDBIcon fas icon="award" />
-            <MDBNavbarLink aria-current='page' href='#'>Points</MDBNavbarLink>
-          </MDBNavbarBrand>
-
-          <MDBNavbarBrand>
-            <MDBIcon far icon="user-circle" />
-            <MDBNavbarLink href='/profile'>Profile</MDBNavbarLink>
-          </MDBNavbarBrand>
-        </MDBContainer>
-      </MDBNavbar></>
+      <NavBar />
+    </>
   );
 }
 

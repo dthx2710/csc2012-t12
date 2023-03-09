@@ -19,6 +19,7 @@ import {
   from 'mdb-react-ui-kit';
 import './Profile.css';
 import userData from '../../data/Users.json'
+import NavBar from '../NavBar/NavBar'
 
 function Profile() {
 
@@ -176,29 +177,9 @@ function Profile() {
 
     </MDBContainer>
 
-      <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF' }}>
-        <MDBContainer fluid>
-          <MDBNavbarBrand>
-            <MDBIcon fas icon="home" />
-            <MDBNavbarLink href='/home'>Home</MDBNavbarLink>
-          </MDBNavbarBrand>
+      <NavBar />
 
-          <MDBNavbarBrand>
-            <MDBIcon fas icon="recycle" />
-            <MDBNavbarLink href='/nearme'>Near Me</MDBNavbarLink>
-          </MDBNavbarBrand>
-
-          <MDBNavbarBrand>
-            <MDBIcon fas icon="award" />
-            <MDBNavbarLink href='/points'>Points</MDBNavbarLink>
-          </MDBNavbarBrand>
-
-          <MDBNavbarBrand>
-            <MDBIcon far icon="user-circle" />
-            <MDBNavbarLink aria-current='page' href='#'>Profile</MDBNavbarLink>
-          </MDBNavbarBrand>
-        </MDBContainer>
-      </MDBNavbar></>
+    </>
   );
 }
 
