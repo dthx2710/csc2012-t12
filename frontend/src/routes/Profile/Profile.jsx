@@ -33,14 +33,12 @@ function Profile() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [currentpoints, setCurrentpoints] = useState(currentUser.currentpoints);
+  const [lifetimepoints, setLifetimepoints] = useState(currentUser.lifetimepoints);
 
 
   const startEditClick = () => {
     setDisableEditing(false);
-  };
-
-  const stopEditClick = () => {
-    setDisableEditing(true);
   };
 
   const handleNameChange = (event) => {
@@ -66,6 +64,8 @@ function Profile() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    setDisableEditing(true);
+
     // Validate current password
     if (currentPassword !== currentUser.password) {
       alert('Current password is incorrect.');
@@ -81,9 +81,12 @@ function Profile() {
     // Update user data
     const updatedUser = {
       ...currentUser,
-      name,
+      name: name,
       username: email,
       password: newPassword || currentUser.password,
+      currentpoints: currentpoints,
+      lifetimepoints: lifetimepoints,
+      login: true
     };
     const updatedUserData = userData.userData.map(user => {
       if (user.id === currentUser.id) {
@@ -99,7 +102,9 @@ function Profile() {
       username: email,
       password: newPassword,
       name: name,
-      login: true,
+      currentpoints: currentUser.currentpoints,
+      lifetimepoints: currentUser.lifetimepoints,
+      login: currentUser.login,
     }).then((response) => {
       console.log(response.status, response.data.token);
     });
@@ -119,12 +124,14 @@ function Profile() {
       username: currentUser.username,
       password: currentUser.password,
       name: currentUser.name,
+      currentpoints: currentUser.currentpoints,
+      lifetimepoints: currentUser.lifetimepoints,
       login: false,
     }).then((response) => {
       console.log(response.status, response.data.token);
     });
 
-    // Navigate to homepage
+    // Navigate to login page
     window.location.href = "/";
   }
 
@@ -154,7 +161,7 @@ function Profile() {
                 <MDBInput wrapperClass='mb-4 w-100' type='password' label='Confirm Password' size="lg" value={confirmPassword} onChange={handleConfirmPasswordChange} disabled={disableEditing} />
 
 
-                <MDBBtn className="mb-2 w-100" size='lg' color="primary" onClick={stopEditClick}>Update</MDBBtn>
+                <MDBBtn className="mb-2 w-100" size='lg' color="primary">Update</MDBBtn>
 
               </form>
 

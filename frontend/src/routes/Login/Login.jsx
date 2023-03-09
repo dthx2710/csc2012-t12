@@ -1,6 +1,7 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import React, { useState, useEffect } from 'react';
 import {
   MDBBtn,
@@ -20,6 +21,7 @@ import logo from '/recycling.svg';
 
 function Login() {
   const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,25 +31,30 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     function checkCredentials(username, password) {
-      const currentUser = userData.userData.find(user => user.username === username && user.password === password);
-      if (currentUser) {
-        alert('User logged in successfully.');
 
-        /*
+      const currentUser = userData.userData.find(user =>
+        user.username === username && user.password === password);
+
+        
+      if (currentUser) {
+        userData.userData = currentUser;
+        alert('User logged in successfully.');
+        // Update database
         axios.put("http://localhost:3001/userData/" + currentUser.id, {
           id: currentUser.id,
           username: currentUser.username,
           password: currentUser.password,
           name: currentUser.name,
+          currentpoints: currentUser.currentpoints,
+          lifetimepoints: currentUser.lifetimepoints,
           login: true,
         }).then((response) => {
-          console.log(response.status, response.data.token);
-        }).catch((error) => {
-          console.error(error);
-        });*/
+          alert(response.status, response.data.token);
+        });
 
         // Navigate to homepage
         window.location.href = "/Home";
+
         //navigate('/home', { replace: true });
       } else {
         // Show an error message if the email and password do not match any user
