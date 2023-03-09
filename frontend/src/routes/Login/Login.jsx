@@ -16,7 +16,7 @@ import {
   from 'mdb-react-ui-kit';
 import './Login.css';
 import userData from '../../data/Users.json'
-import logo from '../../../public/recycling.svg';
+import logo from '/recycling.svg';
 
 function Login() {
   const navigate = useNavigate();
