@@ -1,28 +1,71 @@
-const grpc = require('grpc');
-const protoLoader = require('@grpc/proto-loader');
+const grpc = require("@grpc/grpc-js");
+const protoLoader = require("@grpc/proto-loader");
+const userDB = require("./data/users.json");
 
-const packageDefinition = protoLoader.loadSync('proto/user-service.proto',
-  {
-    keepCase: true,
-    longs: String,
-    enums: String,
-    defaults: true,
-    oneofs: true
-  });
-  
+const packageDefinition = protoLoader.loadSync("proto/user-service.proto", {
+  keepCase: true,
+  longs: String,
+  enums: String,
+  defaults: true,
+  oneofs: true,
+});
+
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
-const userProto = protoDescriptor.User;
-const client = new userProto('localhost:50051', grpc.credentials.createInsecure());
+const userProto = protoDescriptor.user_service;
 
-function getUser(userId) {
-  const request = { id: userId };
-  client.getUser(request, (err, response) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(response);
-    }
-  });
+function Login(username, password) {
+  const user = userDB.find((user) => user.username === username);
+  if (user && user.password === password) {
+    return user;
+  }
+  return null;
 }
 
-// getUser('1234');
+function LoginUser(call, callback) {
+  callback(null, Login(call.request.username, call.request.password));
+}
+
+function userInfo(id) {
+  const user = userDB.find((user) => user.id === id);
+  if (user) {
+    return user;
+  }
+  return null;
+}
+
+function GetInfo(call, callback) {
+  callback(null, userInfo(call.request.id));
+}
+
+function addReward(id, reward) {
+  const user = userDB.find((user) => user.id === id);
+  if (user) {
+    user.reward += reward;
+    return true;
+  }
+  return false;
+}
+
+function GetReward(call, callback) {
+  callback(null, addReward(call.request.id, call.request.reward));
+}
+
+function getServer() {
+  const server = new grpc.Server();
+  server.addService(userProto.User.service, {
+    LoginUser: LoginUser,
+    GetInfo: GetInfo,
+    GetReward: GetReward,
+  });
+  return server;
+}
+
+const userServer = getServer();
+
+userServer.bindAsync(
+  "0.0.0.0:50051",
+  grpc.ServerCredentials.createInsecure(),
+  () => {
+    userServer.start();
+  }
+);
