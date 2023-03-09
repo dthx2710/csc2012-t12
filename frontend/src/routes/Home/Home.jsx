@@ -9,13 +9,16 @@ import {
   MDBRow,
   MDBCol,
   MDBCard,
-  MDBCardBody
+  MDBCardBody,
+  MDBCardLink
 }
   from 'mdb-react-ui-kit';
 import './Home.css';
 import NavBar from '../NavBar/NavBar'
 import Medal from '../../assets/medal.png'
 import Logo from '/recycling.svg';
+import Giftbox from '../../assets/gift-box.png';
+import Point from '../../assets/point.png';
 //import userData from '../../data/Users.json'
 import userData from '../../../../user-service/data/users.json'
 
@@ -106,9 +109,12 @@ function Home() {
 
             <MDBCard className='bg-green mx-auto' style={{ borderRadius: '1rem', maxWidth: '750px' }}>
               <MDBCardBody className='d-flex flex-column'>
-
-
-
+                <MDBCardLink href='/points'>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h4 className="fw-bold text-black mb-2 text-left">Browse All Rewards</h4>
+                    <img src={Giftbox} alt="Giftbox" className='w-10' style={{ maxWidth: '100px' }} />
+                  </div>
+                </MDBCardLink>
               </MDBCardBody>
             </MDBCard>
 
@@ -117,8 +123,12 @@ function Home() {
 
             <MDBCard className='bg-green mx-auto' style={{ borderRadius: '1rem', maxWidth: '750px' }}>
               <MDBCardBody className='d-flex flex-column'>
-
-
+                <MDBCardLink href='/guide'>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <h4 className="fw-bold text-black mb-2 text-left">How to get points?</h4>
+                    <img src={Point} alt="Point" className='w-10' style={{ maxWidth: '100px' }} />
+                  </div>
+                </MDBCardLink>
 
               </MDBCardBody>
             </MDBCard>

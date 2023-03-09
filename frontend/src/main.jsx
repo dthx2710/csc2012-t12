@@ -11,6 +11,7 @@ import Home from "./routes/Home/Home";
 import NearMe from "./routes/NearMe/NearMe";
 import Points from "./routes/Points/Points";
 import Profile from "./routes/Profile/Profile";
+import Guide from "./routes/Guideline/guide";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,11 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: <Profile />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "guide",
+    element: <Guide />,
     errorElement: <ErrorPage />,
   },
 ]);
