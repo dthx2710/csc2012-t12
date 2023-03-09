@@ -16,7 +16,8 @@ import './Home.css';
 import NavBar from '../NavBar/NavBar'
 import Medal from '../../assets/medal.png'
 import Logo from '/recycling.svg';
-import userData from '../../data/Users.json'
+//import userData from '../../data/Users.json'
+import userData from '../../../../user-service/data/users.json'
 
 const currentUser = userData.userData.find(user => user.login);
 

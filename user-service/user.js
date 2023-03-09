@@ -14,7 +14,7 @@ const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
 const userProto = protoDescriptor.user_service;
 
 function Login(username, password) {
-  const user = userDB.find((user) => user.username === username);
+  const user = userDB.userData.find((user) => user.username === username);
   if (user && user.password === password) {
     return user;
   }
@@ -26,7 +26,7 @@ function LoginUser(call, callback) {
 }
 
 function userInfo(id) {
-  const user = userDB.find((user) => user.id === id);
+  const user = userDB.userData.find((user) => user.id === id);
   if (user) {
     return user;
   }
@@ -38,7 +38,7 @@ function GetInfo(call, callback) {
 }
 
 function addReward(id, reward) {
-  const user = userDB.find((user) => user.id === id);
+  const user = userDB.userData.find((user) => user.id === id);
   if (user) {
     user.reward += reward;
     return true;

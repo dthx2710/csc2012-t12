@@ -18,7 +18,8 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Profile.css';
-import userData from '../../data/Users.json'
+//import userData from '../../data/Users.json'
+import userData from '../../../../user-service/data/users.json'
 import NavBar from '../NavBar/NavBar'
 
 function Profile() {
@@ -33,7 +34,7 @@ function Profile() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [currentpoints, setCurrentpoints] = useState(currentUser.currentpoints);
+  const [points, setPoints] = useState(currentUser.points);
   const [lifetimepoints, setLifetimepoints] = useState(currentUser.lifetimepoints);
 
 
@@ -84,7 +85,7 @@ function Profile() {
       name: name,
       username: email,
       password: newPassword || currentUser.password,
-      currentpoints: currentpoints,
+      points: points,
       lifetimepoints: lifetimepoints,
       login: true
     };

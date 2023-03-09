@@ -8,5 +8,5 @@
 
 ## To Login and Update Profile
 - Ensure Users.json is loading
-- cd frontend
-- Run $json-server --watch ./src/data/Users.json --port 3001
+- cd user-service
+- Run $json-server --watch ./data/users.json --port 3001

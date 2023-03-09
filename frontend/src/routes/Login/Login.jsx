@@ -16,7 +16,8 @@ import {
 }
   from 'mdb-react-ui-kit';
 import './Login.css';
-import userData from '../../data/Users.json'
+//import userData from '../../data/Users.json'
+import userData from '../../../../user-service/data/users.json'
 import logo from '/recycling.svg';
 
 function Login() {
