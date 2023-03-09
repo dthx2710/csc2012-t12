@@ -123,31 +123,7 @@ function Points() {
         </MDBRow>
       </MDBContainer>
 
-      <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF' }}>
-        <MDBContainer fluid>
-          <MDBNavbarBrand>
-            <MDBIcon fas icon='home' />
-            <MDBNavbarLink href='/home'>Home</MDBNavbarLink>
-          </MDBNavbarBrand>
-
-          <MDBNavbarBrand>
-            <MDBIcon fas icon='recycle' />
-            <MDBNavbarLink href='/nearme'>Near Me</MDBNavbarLink>
-          </MDBNavbarBrand>
-
-          <MDBNavbarBrand>
-            <MDBIcon fas icon='award' />
-            <MDBNavbarLink aria-current='page' href='#'>
-              Points
-            </MDBNavbarLink>
-          </MDBNavbarBrand>
-
-          <MDBNavbarBrand>
-            <MDBIcon far icon='user-circle' />
-            <MDBNavbarLink href='/profile'>Profile</MDBNavbarLink>
-          </MDBNavbarBrand>
-        </MDBContainer>
-      </MDBNavbar>
+      <NavBar />
     </>
   );
 }
