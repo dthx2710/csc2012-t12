@@ -95,7 +95,7 @@ function Home() {
                   {getTierProgress()}
                 </div>
               </div>
-              <p className="text-right-small">Next Tier: {getNextTier()} <MDBIcon fas icon="question-circle" data-mdb-toggle="tooltip" title="Next Achievable Tier ★" /></p>
+              <p className="text-right-small">Next Tier: {getNextTier()} <MDBIcon fas icon="question-circle" data-mdb-toggle="tooltip" title="Lifetime Points Accumulated for Next Achievable Tier ★" /></p>
             </MDBCard>
           </MDBCol>
         </MDBRow>
