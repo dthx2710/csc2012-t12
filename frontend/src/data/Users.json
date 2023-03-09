@@ -1,17 +1,21 @@
 {
   "userData": [
     {
-      "id": 0,
+      "id": 100001,
       "username": "user1@gmail.com",
       "password": "password",
       "name": "User 1",
+      "currentpoints": 1000,
+      "lifetimepoints": 6000,
       "login": true
     },
     {
-      "id": 1,
+      "id": 100002,
       "username": "user2@gmail.com",
       "password": "password234",
       "name": "User 2",
+      "currentpoints": 2000,
+      "lifetimepoints": 4000,
       "login": false
     }
   ]

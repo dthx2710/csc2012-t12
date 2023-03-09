@@ -23,7 +23,7 @@ function NavBar() {
 
       <MDBNavbarBrand className='active'>
         <MDBIcon fas icon="recycle" />
-        <MDBNavbarLink aria-current='page' href='#'>Near Me</MDBNavbarLink>
+        <MDBNavbarLink aria-current='page' href='/nearme'>Near Me</MDBNavbarLink>
       </MDBNavbarBrand>
 
       <MDBNavbarBrand>
