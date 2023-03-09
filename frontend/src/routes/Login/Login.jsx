@@ -16,6 +16,7 @@ import {
   from 'mdb-react-ui-kit';
 import './Login.css';
 import userData from '../../data/Users.json'
+import logo from '../../../public/recycling.svg';
 
 function Login() {
   const navigate = useNavigate();
@@ -66,8 +67,9 @@ function Login() {
           <MDBCard className='bg-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '500px' }}>
             <MDBCardBody className='p-5 w-100 d-flex flex-column'>
               <form onSubmit={handleSubmit}>
-                <h2 className="fw-bold mb-2 text-center">Sign in</h2>
-                <p className="text-white-50 mb-3">Please enter your login and password!</p>
+                <img src={logo} alt="logo" className="logo" />
+                <h2 className="fw-bold mb-2 text-center">Recycle Smart</h2>
+                <p className="text-black-50 mb-3">Please enter your email and password!</p>
 
                 <MDBInput wrapperClass='mb-4 w-100' label='Email address' id='formControlLg' type='email' size="lg" value={username} onChange={(e) => setUsername(e.target.value)} />
                 <MDBInput wrapperClass='mb-4 w-100' label='Password' id='formControlLg' type='password' size="lg" value={password} onChange={(e) => setPassword(e.target.value)} />
