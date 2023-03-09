@@ -11,54 +11,143 @@ import {
   MDBRow,
   MDBCol,
   MDBCard,
-  MDBCardBody
+  MDBCardBody,
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsLink,
+  MDBTabsContent,
+  MDBTabsPane,
+  MDBCardTitle,
+  MDBCardText,
+  MDBBtn,
+  MDBCardImage,
+  MDBCardFooter
+
 }
   from 'mdb-react-ui-kit';
 import './Points.css';
 
 function Points() {
+  const [basicActive, setBasicActive] = useState('tab1');
+
+  const handleBasicClick = (value) => {
+    if (value === basicActive) {
+      return;
+    }
+
+    setBasicActive(value);
+  };
+
+
+
   return (
-    <><MDBContainer fluid>
+    <>
+      <div>
+        <MDBTabs justify className='mb-3 h-100 position-fixed top-0 start-0 end-0' style={{ 'zIndex': '9999' }} >
+          <MDBTabsItem>
+            <MDBTabsLink onClick={() => handleBasicClick('tab1')} active={basicActive === 'tab1'} style={{ background: '#FFFFF1' }}>
+              Home
+            </MDBTabsLink>
+          </MDBTabsItem>
+          <MDBTabsItem>
+            <MDBTabsLink onClick={() => handleBasicClick('tab2')} active={basicActive === 'tab2'} style={{ background: '#FFFFF1' }}>
+              Rewards
+            </MDBTabsLink>
+          </MDBTabsItem>
+          <MDBTabsItem>
+            <MDBTabsLink onClick={() => handleBasicClick('tab3')} active={basicActive === 'tab3'} style={{ background: '#FFFFF1' }}>
+              History
+            </MDBTabsLink>
+          </MDBTabsItem>
+        </MDBTabs>
+      </div>
 
-      <MDBRow className='d-flex justify-content-center align-items-center h-100'>
-        <MDBCol col='12'>
+      <MDBContainer fluid style={{ marginTop: '3.5rem', marginBottom: '7rem' }}>
+        <MDBRow >
+          <MDBCol >
+            <MDBTabsContent>
+              <MDBTabsPane show={basicActive === 'tab1'}>
 
-          <MDBCard className='bg-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '500px' }}>
-            <MDBCardBody className='p-5 w-100 d-flex flex-column'>
+                <h2>Popular Rewards</h2>
 
-              <h2 className="fw-bold mb-2 text-center">This is Points Page</h2>
+                <MDBCard
+                  className='bg-white  my-5 mx-auto'
+                  style={{ borderRadius: '1rem', maxWidth: '500px' }}
+                >
+                  <MDBCardBody className='w-100 d-flex flex-column'>
+                    <MDBCardImage src='/Grab.svg' position='top' alt='...' />
+                    <MDBCardTitle>Grab</MDBCardTitle>
+                    <MDBCardText>
+                      $10 e-Voucher
+                    </MDBCardText>
+                    <MDBBtn>1000 points</MDBBtn>
+                  </MDBCardBody>
+                  {/* <MDBCardFooter>1000 points</MDBCardFooter> */}
+                </MDBCard>
+                
+                <MDBCard
+                  className='bg-white  my-5 mx-auto'
+                  style={{ borderRadius: '1rem', maxWidth: '500px' }}
+                >
+                  <MDBCardBody className='w-100 d-flex flex-column'>
+                    <MDBCardImage src='/Shopee.svg' position='top' alt='...' />
+                    <MDBCardTitle>Grab</MDBCardTitle>
+                    <MDBCardText>
+                      $10 e-Voucher
+                    </MDBCardText>
+                    <MDBBtn>1000 points</MDBBtn>
+                  </MDBCardBody>
+                  {/* <MDBCardFooter>1000 points</MDBCardFooter> */}
+                </MDBCard>
+                <MDBCard
+                  className='bg-white  my-5 mx-auto'
+                  style={{ borderRadius: '1rem', maxWidth: '500px' }}
+                >
+                  <MDBCardBody className='w-100 d-flex flex-column'>
+                    <MDBCardImage src='/Lazada.svg' position='top' alt='...' />
+                    <MDBCardTitle>Grab</MDBCardTitle>
+                    <MDBCardText>
+                      $10 e-Voucher
+                    </MDBCardText>
+                    <MDBBtn>1000 points</MDBBtn>
+                  </MDBCardBody>
+                  {/* <MDBCardFooter>1000 points</MDBCardFooter> */}
+                </MDBCard>
 
-            </MDBCardBody>
-          </MDBCard>
+              </MDBTabsPane>
+              <MDBTabsPane show={basicActive === 'tab2'}>Tab 2 content</MDBTabsPane>
+              <MDBTabsPane show={basicActive === 'tab3'}>Tab 3 content</MDBTabsPane>
+            </MDBTabsContent>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
 
-        </MDBCol>
-      </MDBRow>
-
-    </MDBContainer>
-    
-    <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF' }}>
+      <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF' }}>
         <MDBContainer fluid>
           <MDBNavbarBrand>
-            <MDBIcon fas icon="home" />
+            <MDBIcon fas icon='home' />
             <MDBNavbarLink href='/home'>Home</MDBNavbarLink>
           </MDBNavbarBrand>
 
           <MDBNavbarBrand>
-            <MDBIcon fas icon="recycle" />
+            <MDBIcon fas icon='recycle' />
             <MDBNavbarLink href='/nearme'>Near Me</MDBNavbarLink>
           </MDBNavbarBrand>
 
           <MDBNavbarBrand>
-            <MDBIcon fas icon="award" />
-            <MDBNavbarLink aria-current='page' href='#'>Points</MDBNavbarLink>
+            <MDBIcon fas icon='award' />
+            <MDBNavbarLink aria-current='page' href='#'>
+              Points
+            </MDBNavbarLink>
           </MDBNavbarBrand>
 
           <MDBNavbarBrand>
-            <MDBIcon far icon="user-circle" />
+            <MDBIcon far icon='user-circle' />
             <MDBNavbarLink href='/profile'>Profile</MDBNavbarLink>
           </MDBNavbarBrand>
         </MDBContainer>
-      </MDBNavbar></>
+      </MDBNavbar>
+    </>
   );
 }
 
