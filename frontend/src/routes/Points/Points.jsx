@@ -1,7 +1,7 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MDBNavbar,
   MDBContainer,
@@ -27,9 +27,15 @@ import {
   from 'mdb-react-ui-kit';
 import './Points.css';
 import NavBar from '../NavBar/NavBar'
+import PopularRewards from './PopularRewards';
+import Rewards from './Rewards';
+import History from './History';
+
 
 function Points() {
   const [basicActive, setBasicActive] = useState('tab1');
+  const [tabZIndex, setTabZIndex] = useState(0);
+  const [navBarZIndex, setNavBarZIndex] = useState(0);
 
   const handleBasicClick = (value) => {
     if (value === basicActive) {
@@ -39,12 +45,21 @@ function Points() {
     setBasicActive(value);
   };
 
-
+  useEffect(() => {
+    if(basicActive === 'tab1' || basicActive === 'tab2' || basicActive === 'tab3'){
+      setTabZIndex(0);
+      setNavBarZIndex(1);
+    }
+    else{
+      setTabZIndex(1);
+      setNavBarZIndex(0);
+    }
+  }, [basicActive, setNavBarZIndex, setTabZIndex]);
 
   return (
     <>
       <div>
-        <MDBTabs justify className='mb-3 h-100 position-fixed top-0 start-0 end-0' style={{ 'zIndex': '9999' }} >
+        <MDBTabs justify className='mb-3 h-100 position-fixed top-0 start-0 end-0' style={{ zIndex: tabZIndex }} >
           <MDBTabsItem>
             <MDBTabsLink onClick={() => handleBasicClick('tab1')} active={basicActive === 'tab1'} style={{ background: '#FFFFF1' }}>
               Home
@@ -66,64 +81,23 @@ function Points() {
       <MDBContainer fluid style={{ marginTop: '3.5rem', marginBottom: '7rem' }}>
         <MDBRow >
           <MDBCol >
-            <MDBTabsContent>
-              <MDBTabsPane show={basicActive === 'tab1'}>
+            {basicActive === 'tab1' && <PopularRewards />}
+            {basicActive === 'tab2' && <Rewards />}
+            {basicActive === 'tab3' && <History />}
+            {
+              /*
+              <MDBTabsContent>
+                <MDBTabsPane show={basicActive === 'tab2'}>Tab 2 content</MDBTabsPane>
+                <MDBTabsPane show={basicActive === 'tab3'}>Tab 3 content</MDBTabsPane>
+              </MDBTabsContent>
+              */
+            }
 
-                <h2>Popular Rewards</h2>
-
-                <MDBCard
-                  className='bg-white  my-5 mx-auto'
-                  style={{ borderRadius: '1rem', maxWidth: '500px' }}
-                >
-                  <MDBCardBody className='w-100 d-flex flex-column'>
-                    <MDBCardImage src='/Grab.svg' position='top' alt='...' />
-                    <MDBCardTitle>Grab</MDBCardTitle>
-                    <MDBCardText>
-                      $10 e-Voucher
-                    </MDBCardText>
-                    <MDBBtn>1000 points</MDBBtn>
-                  </MDBCardBody>
-                  {/* <MDBCardFooter>1000 points</MDBCardFooter> */}
-                </MDBCard>
-                
-                <MDBCard
-                  className='bg-white  my-5 mx-auto'
-                  style={{ borderRadius: '1rem', maxWidth: '500px' }}
-                >
-                  <MDBCardBody className='w-100 d-flex flex-column'>
-                    <MDBCardImage src='/Shopee.svg' position='top' alt='...' />
-                    <MDBCardTitle>Grab</MDBCardTitle>
-                    <MDBCardText>
-                      $10 e-Voucher
-                    </MDBCardText>
-                    <MDBBtn>1000 points</MDBBtn>
-                  </MDBCardBody>
-                  {/* <MDBCardFooter>1000 points</MDBCardFooter> */}
-                </MDBCard>
-                <MDBCard
-                  className='bg-white  my-5 mx-auto'
-                  style={{ borderRadius: '1rem', maxWidth: '500px' }}
-                >
-                  <MDBCardBody className='w-100 d-flex flex-column'>
-                    <MDBCardImage src='/Lazada.svg' position='top' alt='...' />
-                    <MDBCardTitle>Grab</MDBCardTitle>
-                    <MDBCardText>
-                      $10 e-Voucher
-                    </MDBCardText>
-                    <MDBBtn>1000 points</MDBBtn>
-                  </MDBCardBody>
-                  {/* <MDBCardFooter>1000 points</MDBCardFooter> */}
-                </MDBCard>
-
-              </MDBTabsPane>
-              <MDBTabsPane show={basicActive === 'tab2'}>Tab 2 content</MDBTabsPane>
-              <MDBTabsPane show={basicActive === 'tab3'}>Tab 3 content</MDBTabsPane>
-            </MDBTabsContent>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
 
-      <NavBar />
+      <NavBar zIndex={navBarZIndex} onClick={() => handleBasicClick('navBar')} active={basicActive === 'navBar'}/>
     </>
   );
 }

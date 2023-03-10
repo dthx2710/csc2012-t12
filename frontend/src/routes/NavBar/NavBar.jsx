@@ -12,9 +12,12 @@ import {
 from 'mdb-react-ui-kit';
 import './NavBar.css';
 
-function NavBar() {
+function NavBar(props) {
+
+  const { zIndex } = props;
+
   return (
-    <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF' }}>
+    <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF', zIndex: zIndex }}>
     <MDBContainer fluid>
       <MDBNavbarBrand>
         <MDBIcon fas icon="home" />
@@ -23,7 +26,7 @@ function NavBar() {
 
       <MDBNavbarBrand className='active'>
         <MDBIcon fas icon="recycle" />
-        <MDBNavbarLink aria-current='page' href='/nearme'>Near Me</MDBNavbarLink>
+        <MDBNavbarLink href='/nearme'>Near Me</MDBNavbarLink>
       </MDBNavbarBrand>
 
       <MDBNavbarBrand>
