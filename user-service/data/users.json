@@ -5,6 +5,7 @@
       "username": "jdoe@gmail.com",
       "password": "password",
       "name": "John Doe",
+      "points": 300,
       "lifetimepoints": 6000,
       "login": true
     },

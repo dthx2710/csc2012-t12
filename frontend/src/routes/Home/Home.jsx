@@ -81,13 +81,13 @@ function Home() {
           <img src={Logo} alt="Logo" className="logo" />
           <h2 className="fw-bold">Recycle Smart.</h2>
         </div>
-        <MDBRow className='d-flex justify-content-center align-items-center vw75width'>
+        <MDBRow className='d-flex justify-content-center align-items-center'>
           <MDBCol col='12'>
-            <MDBCard className='bg-green my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '750px' }}>
+            <MDBCard className='bg-green mb-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '1000px' }}>
 
               <div className="d-flex justify-content-between align-items-center">
                 <h4 className="fw-bold text-black mb-2 text-left">{currentUser.name}</h4>
-                <p className="text-black-med">You have: {currentUser.currentpoints} Points</p>
+                <p className="text-black-med">You have: {currentUser.points} Points</p>
               </div>
               <p className="text-black-med"><MDBIcon fas icon="user" /> {currentUser.id}</p>
               <div className="d-flex justify-content-between align-items-center">
@@ -104,10 +104,10 @@ function Home() {
           </MDBCol>
         </MDBRow>
 
-        <MDBRow className='d-flex justify-content-center align-items-center vw75width'>
+        <MDBRow className='d-flex justify-content-center align-items-center'>
           <MDBCol col='6'>
 
-            <MDBCard className='bg-green mx-auto' style={{ borderRadius: '1rem', maxWidth: '750px' }}>
+            <MDBCard className='bg-green mb-10 mx-auto' style={{ borderRadius: '1rem', maxWidth: '750px' }}>
               <MDBCardBody className='d-flex flex-column'>
                 <MDBCardLink href='/points'>
                   <div className="d-flex justify-content-between align-items-center">
@@ -121,7 +121,7 @@ function Home() {
           </MDBCol>
           <MDBCol col='6'>
 
-            <MDBCard className='bg-green mx-auto' style={{ borderRadius: '1rem', maxWidth: '750px' }}>
+            <MDBCard className='bg-green mb-10 mx-auto' style={{ borderRadius: '1rem', maxWidth: '750px' }}>
               <MDBCardBody className='d-flex flex-column'>
                 <MDBCardLink href='/guide'>
                   <div className="d-flex justify-content-between align-items-center">
