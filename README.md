@@ -7,7 +7,7 @@ Name | Student ID | Role | Github
 **Dylan Tok Hong Xun** | 2101372 | gRPC Gateway & Backend Lead | [@dthx2710](https://github.com/dthx2710)
 **Derick** | 2100689 | Frontend Developer | [@zyferis](https://github.com/zyferis)
 **Yee Kit** | 2100649 | Frontend Lead | [@xKhronoz](https://github.com/xKhronoz)
-**Xiang Hui** | | | 
+**Xiang Hui** | 2101993 | Computer Vision Developer | [@XiangHui556](https://github.com/XiangHui556)
 **Xun Thong** | 2102436 | Frontend Developer | [@xunthongkkkkkk](https://github.com/xunthongkkkkkk)
 **Sing Thai** | 2102954 | Docker | [@singthaitan](https://github.com/singthaitan)
 
