@@ -1,45 +1,47 @@
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from "react-router-dom";
-import React from 'react';
+import React from "react";
 import {
   MDBNavbar,
   MDBContainer,
   MDBIcon,
   MDBNavbarLink,
   MDBNavbarBrand,
-}
-from 'mdb-react-ui-kit';
-import './NavBar.css';
+} from "mdb-react-ui-kit";
+import "./NavBar.css";
 
 function NavBar(props) {
-
   const { zIndex } = props;
 
   return (
-    <MDBNavbar fixed='bottom' light style={{ backgroundColor: '#FFFFFF', zIndex: zIndex }}>
-    <MDBContainer fluid>
-      <MDBNavbarBrand>
-        <MDBIcon fas icon="home" />
-        <MDBNavbarLink href='/home'>Home</MDBNavbarLink>
-      </MDBNavbarBrand>
+    <MDBNavbar
+      fixed="bottom"
+      light
+      style={{ backgroundColor: "#FFFFFF", zIndex: zIndex }}
+    >
+      <MDBContainer fluid>
+        <MDBNavbarBrand>
+          <MDBIcon className="me-3" fas icon="home" />
+          <Link to="/home">Home</Link>
+        </MDBNavbarBrand>
 
-      <MDBNavbarBrand className='active'>
-        <MDBIcon fas icon="recycle" />
-        <MDBNavbarLink href='/nearme'>Near Me</MDBNavbarLink>
-      </MDBNavbarBrand>
+        <MDBNavbarBrand className="active">
+          <MDBIcon className="me-3" fas icon="recycle" />
+          <Link to="/nearme">Near Me</Link>
+        </MDBNavbarBrand>
 
-      <MDBNavbarBrand>
-        <MDBIcon fas icon="award" />
-        <MDBNavbarLink href='/points'>Points</MDBNavbarLink>
-      </MDBNavbarBrand>
+        <MDBNavbarBrand>
+          <MDBIcon className="me-3" fas icon="award" />
+          <Link to="/points">Points</Link>
+        </MDBNavbarBrand>
 
-      <MDBNavbarBrand>
-        <MDBIcon far icon="user-circle" />
-        <MDBNavbarLink href='/profile'>Profile</MDBNavbarLink>
-      </MDBNavbarBrand>
-    </MDBContainer>
-  </MDBNavbar>
+        <MDBNavbarBrand>
+          <MDBIcon className="me-3" far icon="user-circle" />
+          <Link to="/profile">Profile</Link>
+        </MDBNavbarBrand>
+      </MDBContainer>
+    </MDBNavbar>
   );
 }
 

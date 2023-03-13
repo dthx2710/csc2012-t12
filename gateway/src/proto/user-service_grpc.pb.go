@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	User_LoginUser_FullMethodName = "/user_service.User/LoginUser"
-	User_GetInfo_FullMethodName   = "/user_service.User/GetInfo"
-	User_GetReward_FullMethodName = "/user_service.User/GetReward"
+	User_LoginUser_FullMethodName     = "/user_service.User/LoginUser"
+	User_GetUser_FullMethodName       = "/user_service.User/GetUser"
+	User_GetPoint_FullMethodName      = "/user_service.User/GetPoint"
+	User_UpdateProfile_FullMethodName = "/user_service.User/UpdateProfile"
 )
 
 // UserClient is the client API for User service.
@@ -29,8 +30,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserClient interface {
 	LoginUser(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	GetInfo(ctx context.Context, in *InfoRequest, opts ...grpc.CallOption) (*InfoResponse, error)
-	GetReward(ctx context.Context, in *RewardRequest, opts ...grpc.CallOption) (*RewardResponse, error)
+	GetUser(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UserResponse, error)
+	GetPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointResponse, error)
+	UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*UpdateProfileResponse, error)
 }
 
 type userClient struct {
@@ -50,18 +52,27 @@ func (c *userClient) LoginUser(ctx context.Context, in *LoginRequest, opts ...gr
 	return out, nil
 }
 
-func (c *userClient) GetInfo(ctx context.Context, in *InfoRequest, opts ...grpc.CallOption) (*InfoResponse, error) {
-	out := new(InfoResponse)
-	err := c.cc.Invoke(ctx, User_GetInfo_FullMethodName, in, out, opts...)
+func (c *userClient) GetUser(ctx context.Context, in *UserRequest, opts ...grpc.CallOption) (*UserResponse, error) {
+	out := new(UserResponse)
+	err := c.cc.Invoke(ctx, User_GetUser_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userClient) GetReward(ctx context.Context, in *RewardRequest, opts ...grpc.CallOption) (*RewardResponse, error) {
-	out := new(RewardResponse)
-	err := c.cc.Invoke(ctx, User_GetReward_FullMethodName, in, out, opts...)
+func (c *userClient) GetPoint(ctx context.Context, in *PointRequest, opts ...grpc.CallOption) (*PointResponse, error) {
+	out := new(PointResponse)
+	err := c.cc.Invoke(ctx, User_GetPoint_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) UpdateProfile(ctx context.Context, in *UpdateProfileRequest, opts ...grpc.CallOption) (*UpdateProfileResponse, error) {
+	out := new(UpdateProfileResponse)
+	err := c.cc.Invoke(ctx, User_UpdateProfile_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +84,9 @@ func (c *userClient) GetReward(ctx context.Context, in *RewardRequest, opts ...g
 // for forward compatibility
 type UserServer interface {
 	LoginUser(context.Context, *LoginRequest) (*LoginResponse, error)
-	GetInfo(context.Context, *InfoRequest) (*InfoResponse, error)
-	GetReward(context.Context, *RewardRequest) (*RewardResponse, error)
+	GetUser(context.Context, *UserRequest) (*UserResponse, error)
+	GetPoint(context.Context, *PointRequest) (*PointResponse, error)
+	UpdateProfile(context.Context, *UpdateProfileRequest) (*UpdateProfileResponse, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -85,11 +97,14 @@ type UnimplementedUserServer struct {
 func (UnimplementedUserServer) LoginUser(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
 }
-func (UnimplementedUserServer) GetInfo(context.Context, *InfoRequest) (*InfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
+func (UnimplementedUserServer) GetUser(context.Context, *UserRequest) (*UserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedUserServer) GetReward(context.Context, *RewardRequest) (*RewardResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetReward not implemented")
+func (UnimplementedUserServer) GetPoint(context.Context, *PointRequest) (*PointResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPoint not implemented")
+}
+func (UnimplementedUserServer) UpdateProfile(context.Context, *UpdateProfileRequest) (*UpdateProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProfile not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 
@@ -122,38 +137,56 @@ func _User_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InfoRequest)
+func _User_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).GetInfo(ctx, in)
+		return srv.(UserServer).GetUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_GetInfo_FullMethodName,
+		FullMethod: User_GetUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetInfo(ctx, req.(*InfoRequest))
+		return srv.(UserServer).GetUser(ctx, req.(*UserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _User_GetReward_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RewardRequest)
+func _User_GetPoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PointRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServer).GetReward(ctx, in)
+		return srv.(UserServer).GetPoint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: User_GetReward_FullMethodName,
+		FullMethod: User_GetPoint_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServer).GetReward(ctx, req.(*RewardRequest))
+		return srv.(UserServer).GetPoint(ctx, req.(*PointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_UpdateProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).UpdateProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_UpdateProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).UpdateProfile(ctx, req.(*UpdateProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -170,12 +203,16 @@ var User_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _User_LoginUser_Handler,
 		},
 		{
-			MethodName: "GetInfo",
-			Handler:    _User_GetInfo_Handler,
+			MethodName: "GetUser",
+			Handler:    _User_GetUser_Handler,
 		},
 		{
-			MethodName: "GetReward",
-			Handler:    _User_GetReward_Handler,
+			MethodName: "GetPoint",
+			Handler:    _User_GetPoint_Handler,
+		},
+		{
+			MethodName: "UpdateProfile",
+			Handler:    _User_UpdateProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

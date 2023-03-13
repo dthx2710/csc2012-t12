@@ -5,13 +5,13 @@ package image_service;
 option go_package = "csc2012-t12/proto";
 
 service Image{
-    rpc ComputerVision(CVRequest) returns (CVResponse) {}
+    rpc Recycle(RecycleRequest) returns (RecycleResponse) {}
 }
 
-message CVRequest{
+message RecycleRequest{
     string type = 1;
 }
 
-message CVResponse{
+message RecycleResponse{
     bool result = 1;
 }

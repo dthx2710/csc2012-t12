@@ -4,6 +4,7 @@ import (
 	"context"
 	gw "csc2012-t12/gateway/proto"
 	"flag"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -15,20 +16,6 @@ import (
 
 type UserServer struct {
 	gw.UnimplementedUserServer
-}
-
-func (s *UserServer) GetInfo(ctx context.Context, req *gw.InfoRequest) (*gw.InfoResponse, error) {
-	type User struct {
-		Username string
-		Name     string
-		Points   int32
-	}
-	user := User{
-		Username: "test",
-		Name:     "test",
-		Points:   100,
-	}
-	return &gw.InfoResponse{Username: user.Username, Name: user.Name, Points: user.Points}, nil
 }
 
 // service endpoints
@@ -92,19 +79,9 @@ func main() {
 	flag.Parse()
 	defer glog.Flush()
 
+	fmt.Printf("Starting HTTP/1.1 gateway on port 8080")
+	// Start HTTP server (and proxy calls to gRPC server endpoint)
 	if err := Run(":8080"); err != nil {
 		glog.Fatal(err)
 	}
-
-	// listen, err := net.Listen("tcp", ":8080")
-	// if err != nil {
-	// 	log.Fatalf("did not connect: %v", err)
-	// }
-
-	// grpcServer := grpc.NewServer()
-	// gw.RegisterUserServer(grpcServer, &UserServer{})
-	// err = grpcServer.Serve(listen)
-	// if err != nil {
-	// 	log.Fatalf("failed to serve: %v", err)
-	// }
 }
