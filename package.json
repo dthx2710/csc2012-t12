@@ -1,0 +1,19 @@
+{
+  "name": "csc2012-t12",
+  "version": "1.0.0",
+  "description": "CSC2012 Project Repository",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "up": "docker-compose up -d"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dthx2710/csc2012-t12.git"
+  },
+  "author": "Team12",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dthx2710/csc2012-t12/issues"
+  },
+  "homepage": "https://github.com/dthx2710/csc2012-t12#readme"
+}
