@@ -1,0 +1,1 @@
+python detect.py --weights psd.pt --no-download --source 0 --nosave --conf-thres 0.5 --device 0
