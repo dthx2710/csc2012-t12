@@ -20,14 +20,18 @@ type UserServer struct {
 
 // service endpoints
 var (
-	userEndpoint = flag.String("user_endpoint", "localhost:50051", "endpoint of User Service")
-	// imageendpoint = flag.String("image_endpoint", "localhost:50052", "endpoint of Image Service")
+	userEndpoint  = flag.String("user_endpoint", "localhost:50051", "endpoint of User Service")
+	imageEndpoint = flag.String("image_endpoint", "localhost:50052", "endpoint of Image Service")
 )
 
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
 	mux := runtime.NewServeMux(opts...)
 	dialOpts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
-	err := gw.RegisterUserHandlerFromEndpoint(ctx, mux, *userEndpoint, dialOpts)
+	err := gw.RegisterUserHandlerFromEndpoint(ctx, mux, *userEndpoint, dialOpts) // register user service
+	if err != nil {
+		return nil, err
+	}
+	err = gw.RegisterImageHandlerFromEndpoint(ctx, mux, *imageEndpoint, dialOpts) // register image service
 	if err != nil {
 		return nil, err
 	}

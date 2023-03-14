@@ -1,0 +1,13 @@
+{
+  "name": "image-service",
+  "version": "1.0.0",
+  "description": "- Added Label for Every Track\r - Code can run on Both (CPU & GPU)\r - Video/WebCam/External Camera/IP Stream Supported",
+  "main": "app.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cv" : "python detect.py --weights psd.pt --no-download --source 0 --nosave --conf-thres 0.5 --device cpu",
+    "start" : "npm run cv"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -16,6 +16,9 @@ from utils.general import check_img_size, check_requirements, \
 from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized, TracedModel
 from utils.download_weights import download
+from app import checkItem, serve
+import threading
+
 
 
 TOTALFRAMECOUNT = 10
@@ -155,14 +158,19 @@ def detect(save_img=False):
             frameSectionCounter += 1
             #print(frameSectionCounter, end="\r")
             if frameSectionCounter > TOTALFRAMECOUNT:
+                canFounded = False
+                paperFounded = False
+                plasticFounded = False
                 if canCounter >= CONFIDENTTHRESHOLD:
-                    print("Can")
+                    canFounded = True
 
                 if paperCounter >= CONFIDENTTHRESHOLD:
-                    print("Paper")
+                    paperFounded = True
 
                 if plasticCounter >= CONFIDENTTHRESHOLD:
-                    print("Plastic")
+                    plasticFounded = True
+                
+                checkItem(paperFounded, plasticFounded, canFounded)
 
                 frameSectionCounter = 0
                 canCounter = 0
@@ -198,6 +206,8 @@ if __name__ == '__main__':
     opt = parser.parse_args()
     print(opt)
 
+    t1 = threading.Thread(target=serve)
+    t1.start()
     # check_requirements(exclude=('pycocotools', 'thop'))
     if opt.download and not os.path.exists(opt.weights[0]):
         print('Model weights not found. Attempting to download now...')

@@ -4,8 +4,14 @@ package image_service;
 
 option go_package = "csc2012-t12/proto";
 
+import "google/api/annotations.proto";
+
 service Image{
-    rpc Recycle(RecycleRequest) returns (RecycleResponse) {}
+    rpc Recycle(RecycleRequest) returns (RecycleResponse) {
+        option (google.api.http) = {
+        get: "/recycle/{id}"
+        body: "*"
+    };}
 }
 
 message RecycleRequest{

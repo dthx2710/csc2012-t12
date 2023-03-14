@@ -21,16 +21,31 @@ const App = () => {
   // if loggedIn is true
   // axios get request to /recycle every 1 second, if success set cooldown of 5 seconds and add rewards
   // if fail, do nothing
-  // setInterval(() => {
-  //   axios
-  //     .get("/recycle")
-  //     .then(() => {
-  //       setInterval(() => {}, 5000);
-  //       // add reward points
-  //       // log on window
-  //     })
-  //     .catch(() => {});
-  // }, 1000);
+  useEffect(() => {
+    if (user) {
+      setInterval(() => {
+        axios
+          .get("/api/recycle/" + user.id)
+          .then((res) => {
+            if (res.data.status) {
+              // add reward points
+              // log on window
+              alert("You have earned " + res.data.reward + " points!")
+
+              // post request to /api/point/{id} to add points
+              
+
+              setInterval(() => {}, 5000);
+            }
+            console.log(res.data);
+          })
+          .catch(() => {});
+      }, 1000);
+    } else {
+      // if user is not logged in, clear the interval
+      clearInterval();
+    }
+  }, [user]);
 
   const router = createBrowserRouter([
     {
