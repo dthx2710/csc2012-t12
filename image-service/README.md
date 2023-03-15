@@ -81,3 +81,24 @@ python detect_and_track.py --weights yolov7.pt --source "your video.mp4" --class
 - https://medium.com/augmented-startups/develop-an-analytics-dashboard-using-streamlit-e6282fa5e0f
 
 For more details, you can reach out to me on [Medium](https://chr043416.medium.com/) or can connect with me on [LinkedIn](https://www.linkedin.com/in/muhammadrizwanmunawar/)
+
+# Installation via Docker
+- Ensure DOCKER service is running
+- Open terminal
+- Run the following to build the docker image
+```
+docker build -t image-service .
+```
+- Run the following to start the docker for front end
+``` 
+docker run -d -p 50052:50052 --name image-service_docker image-service
+```
+- Run the following to ensure that service ```image-service_docker``` is running
+```
+docker ps
+``` 
+- Access by visiting 
+```
+http://localhost:50052
+```
+
