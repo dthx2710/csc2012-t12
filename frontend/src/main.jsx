@@ -8,7 +8,7 @@ import Home from "./routes/Home/Home";
 import NearMe from "./routes/NearMe/NearMe";
 import Points from "./routes/Points/Points";
 import Profile from "./routes/Profile/Profile";
-import Guide from "./routes/Guideline/guide";
+import Guide from "./routes/Guideline/Guide";
 import axios from "axios";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
