@@ -34,6 +34,10 @@ seaborn>=0.11.0
 # tensorflowjs>=3.9.0  # TF.js export
 # openvino-dev  # OpenVINO export
 
+# gRPC
+#grpc-tools
+grpcio-tools
+
 # Extras --------------------------------------
 ipython  # interactive notebook
 psutil  # system utilization
@@ -42,6 +46,4 @@ thop  # FLOPs computation
 # pycocotools>=2.0  # COCO mAP
 # roboflow
 
-# gRPC
-grpc-tools
-grpcio-tools
+
