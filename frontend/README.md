@@ -1,19 +1,18 @@
 ## Installation via Docker
 - Ensure DOCKER service is running
 - Open terminal
-- Run 
+- Run the following to build the docker image
 ```
 docker build -t frontend .
 ```
-- Run 
+- Run the following to start the docker for front end
 ``` 
 docker run -d -p 3000:3000 --name frontend_docker frontend
 ```
-- Run 
+- Run the following to ensure that service ```frontend_docker``` is running
 ```
 docker ps
 ``` 
-to ensure that service ```frontend_docker``` is running
 - Run app by visiting 
 ```
 http://localhost:3000
