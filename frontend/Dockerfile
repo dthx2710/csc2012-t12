@@ -1,5 +1,5 @@
 # Use an official Node runtime as a parent image
-FROM node:bullseye
+FROM node:bullseye as builder
 
 # Set the working directory to /app
 WORKDIR /app
@@ -32,7 +32,7 @@ FROM nginx:latest
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the frontend build files to the default Nginx document root
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose port 80 for the Nginx server
 EXPOSE 80
