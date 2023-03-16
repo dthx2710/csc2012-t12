@@ -1,43 +1,21 @@
-FROM golang:1.17-alpine AS builder
+# Use a golang base image
+FROM golang:1.17.5-alpine3.15
 
-WORKDIR /app
+# Set the working directory
+WORKDIR /src
 
-# Install required dependencies
-RUN apk add --no-cache git
-
-# Copy the source code into the container
+# Copy go.mod and go.sum to the working directory
 COPY . .
 
-# Build the server executable
+# Download Go module dependencies
 RUN go mod download
+
+# Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -o main .
 
-FROM alpine:latest
-
-RUN apk --no-cache add ca-certificates
-
-WORKDIR /app
-
-# Copy the server executable built in the previous stage
-COPY --from=builder /app/main .
-
-# Copy frontend files into backend image
-FROM node:16-alpine AS frontend
-
-WORKDIR /app
-
-COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci
-
-COPY frontend .
-RUN npm run build
-
-# Copy built frontend files into backend image
-FROM scratch
-COPY --from=builder /gateway /gateway
-COPY --from=frontend /app/build /frontend
-
+# Expose the port on which the server will listen
 EXPOSE 8080
 
 # Start the server
 CMD ["./main"]
+
