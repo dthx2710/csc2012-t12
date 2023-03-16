@@ -46,11 +46,16 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:3000"
+      - "80:80"
+    expose:
+      - "3000"
     networks:
       - app-network
     env_file:
       - route-map.env
+    restart: always
+    volumes:
+      - /etc/nginx/
 
 networks:
   app-network:

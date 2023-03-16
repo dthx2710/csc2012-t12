@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8
+FROM python:bullseye
 
 # Set the working directory to /app
 WORKDIR /app
@@ -13,8 +13,5 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 # Make port 50052 available to the world outside this container
 EXPOSE 50052
 
-# Define environment variable
-ENV NAME World
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+# Start the server
+CMD ["python", "cv.py"]
