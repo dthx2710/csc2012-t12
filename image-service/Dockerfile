@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libqt5widgets5 \
     libqt5gui5 \
     libqt5core5a \
+    libxcb-xinerama0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Make port 50052 available to the world outside this container
