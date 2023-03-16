@@ -17,35 +17,76 @@ const App = () => {
   // user data global state
   const [user, setUser] = useState(null);
   const [sessionPassword, setSessionPassword] = useState(null);
+  const [recycleInterval, setRecycleInterval] = useState(null);
 
   // if loggedIn is true
   // axios get request to /recycle every 1 second, if success set cooldown of 5 seconds and add rewards
   // if fail, do nothing
+
+  const startRecycleInterval = () => {
+    const intervalId = setInterval(async () => {
+      const status = await pollRecycle();
+      if (status) {
+        clearInterval(intervalId);
+        setTimeout(() => {
+          startRecycleInterval();
+        }, 5000);
+      }
+    }, 1000);
+    setRecycleInterval(intervalId);
+  };
+
   useEffect(() => {
+    clearInterval(recycleInterval);
     if (user) {
-      setInterval(() => {
-        axios
-          .get("/api/recycle/" + user.id)
-          .then((res) => {
-            if (res.data.status) {
-              // add reward points
-              // log on window
-              alert("You have earned " + res.data.reward + " points!")
-
-              // post request to /api/point/{id} to add points
-              
-
-              setInterval(() => {}, 5000);
-            }
-            console.log(res.data);
-          })
-          .catch(() => {});
-      }, 1000);
+      startRecycleInterval();
     } else {
-      // if user is not logged in, clear the interval
-      clearInterval();
+      clearInterval(recycleInterval);
     }
-  }, [user]);
+    return () => clearInterval(recycleInterval);
+  }, [user?.id]);
+
+  const pollRecycle = async () => {
+    let status = false;
+    await axios.get("/api/recycle/" + user.id).then((res) => {
+      if (res.data.status === true) {
+        // can = 75 points, bottle = 125 points, paper = 25 points
+        const rewardMap = {
+          can: 75,
+          plastic: 125,
+          paper: 25,
+          nothing: 0,
+        };
+        const rewardPoint = rewardMap[res.data.type];
+        // add reward points
+        // post request to /api/point/{id} to add points
+        axios.post("/api/point/" + user.id, { points_change: rewardPoint });
+
+        console.log("Recycled: ", res.data.type);
+        console.log("Points added: ", rewardPoint);
+
+        // update user data
+        // setUser({ ...user, points: user.points + rewardPoint, lifetimePoints: user.lifetimePoints + rewardPoint })
+        axios.get("/api/user/" + user.id).then((res) => {
+          setUser({
+            ...user,
+            points: res.data.points,
+            lifetimePoints: res.data.lifetimePoints,
+          });
+        });
+        // log on window
+        alert(
+          "You recycled a " +
+            res.data.type +
+            " and earned " +
+            rewardPoint +
+            " points"
+        );
+        status = true;
+      }
+    });
+    return status;
+  };
 
   const router = createBrowserRouter([
     {

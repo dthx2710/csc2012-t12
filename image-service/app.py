@@ -11,7 +11,7 @@ canDetected = False
 class ImageServicer(image_service_pb2_grpc.ImageServicer):
     def Recycle(self, request, context):
         global paperDetected, plasticDetected, canDetected
-        print("Recycle function called: ", paperDetected, plasticDetected, canDetected)
+        # print("Recycle function called: ", paperDetected, plasticDetected, canDetected)
         # call function to check whether the item is recycled and return the type
         if paperDetected:
             return image_service_pb2.RecycleResponse(status=True, type="paper")
