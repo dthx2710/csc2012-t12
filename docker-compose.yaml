@@ -10,24 +10,26 @@ services:
       - image-service
     networks:
       - app-network
+    env_file:
+      - route-map.env
 
   user-service:
     build: ./user-service
     ports:
       - "50051:50051"
-    depends_on:
-      - db
     networks:
       - app-network
+    env_file:
+      - route-map.env
 
   image-service:
     build: ./image-service
     ports:
       - "50052:50052"
-    depends_on:
-      - db
     networks:
       - app-network
+    env_file:
+      - route-map.env
 
   # db:
   #   image: postgres
@@ -47,6 +49,8 @@ services:
       - "3000:3000"
     networks:
       - app-network
+    env_file:
+      - route-map.env
 
 networks:
   app-network:

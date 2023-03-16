@@ -1,6 +1,7 @@
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 const fs = require("fs");
+require("dotenv").config();
 
 const packageDefinition = protoLoader.loadSync("proto/user-service.proto", {
   keepCase: true,
@@ -96,8 +97,6 @@ function UpdateProfile(call, callback) {
   callback(null, updateUser(call.request.id, call.request));
 }
 
-
-
 function getServer() {
   const server = new grpc.Server();
   server.addService(userProto.User.service, {
@@ -109,13 +108,9 @@ function getServer() {
   return server;
 }
 
+const port = process.env.USER_SERVICE_URL.split(":")[1] || 50051;
 const userServer = getServer();
-
-userServer.bindAsync(
-  "0.0.0.0:50051",
-  grpc.ServerCredentials.createInsecure(),
-  () => {
-    console.log("User-service is listening on port 50051");
-    userServer.start();
-  }
-);
+userServer.bindAsync(process.env.USER_SERVICE_URL, grpc.ServerCredentials.createInsecure(), () => {
+  console.log("User-service is listening on port " + port);
+  userServer.start();
+});

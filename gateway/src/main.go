@@ -5,26 +5,41 @@ import (
 	gw "csc2012-t12/gateway/proto"
 	"flag"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
+
+func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
+	flag.Parse()
+	defer glog.Flush()
+
+	fmt.Printf("Starting HTTP/1.1 gateway on port 8080")
+	// Start HTTP server (and proxy calls to gRPC server endpoint)
+	if err := Run(":8080"); err != nil {
+		glog.Fatal(err)
+	}
+}
 
 type UserServer struct {
 	gw.UnimplementedUserServer
 }
 
-// service endpoints
-var (
-	userEndpoint  = flag.String("user_endpoint", "localhost:50051", "endpoint of User Service")
-	imageEndpoint = flag.String("image_endpoint", "localhost:50052", "endpoint of Image Service")
-)
-
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
+	userEndpoint := flag.String("user_endpoint", os.Getenv("USER_SERVICE_URL"), "endpoint of User Service")
+	imageEndpoint := flag.String("image_endpoint", os.Getenv("IMAGE_SERVICE_URL"), "endpoint of Image Service")
 	mux := runtime.NewServeMux(opts...)
 	dialOpts := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
 	err := gw.RegisterUserHandlerFromEndpoint(ctx, mux, *userEndpoint, dialOpts) // register user service
@@ -77,15 +92,4 @@ func Run(address string, opts ...runtime.ServeMuxOption) error {
 	mux.Handle("/", gw)
 
 	return http.ListenAndServe(address, allowCORS(mux))
-}
-
-func main() {
-	flag.Parse()
-	defer glog.Flush()
-
-	fmt.Printf("Starting HTTP/1.1 gateway on port 8080")
-	// Start HTTP server (and proxy calls to gRPC server endpoint)
-	if err := Run(":8080"); err != nil {
-		glog.Fatal(err)
-	}
 }

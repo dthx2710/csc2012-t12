@@ -2,13 +2,16 @@
 FROM golang:1.17.5-alpine3.15
 
 # Set the working directory
-WORKDIR /src
+WORKDIR /app
 
 # Copy go.mod and go.sum to the working directory
-COPY . .
+COPY ./src/go.mod ./src/go.sum ./
 
 # Download Go module dependencies
 RUN go mod download
+
+# Copy the rest of the source code
+COPY ./src .
 
 # Build the application
 RUN CGO_ENABLED=0 GOOS=linux go build -o main .
@@ -18,4 +21,3 @@ EXPOSE 8080
 
 # Start the server
 CMD ["./main"]
-
