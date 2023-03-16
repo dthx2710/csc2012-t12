@@ -1,6 +1,6 @@
 FROM golang:1.17-alpine AS builder
 
-WORKDIR /app
+WORKDIR /app/src
 
 # Install required dependencies
 RUN apk add --no-cache git
@@ -21,7 +21,7 @@ WORKDIR /app
 # Copy the server executable built in the previous stage
 COPY --from=builder /app/main .
 
-# Copy frontend files into backend image
+# Build the frontend files
 FROM node:16-alpine AS frontend
 
 WORKDIR /app
@@ -32,12 +32,19 @@ RUN npm ci
 COPY frontend .
 RUN npm run build
 
-# Copy built frontend files into backend image
-FROM scratch
-COPY --from=builder /gateway /gateway
-COPY --from=frontend /app/build /frontend
+# Copy the built frontend files into the server container
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /app
+
+COPY --from=builder /app/main .
+COPY --from=frontend /app/build /app/build
 
 EXPOSE 8080
 
 # Start the server
 CMD ["./main"]
+
+
