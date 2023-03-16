@@ -54,8 +54,6 @@ services:
     env_file:
       - route-map.env
     restart: always
-    volumes:
-      - /etc/nginx/
 
 networks:
   app-network:
