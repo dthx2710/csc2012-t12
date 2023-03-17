@@ -12,9 +12,11 @@ CSC2012 T12 Project - Smart recycling with Cloud native microservices - decoupli
 | **Sing Thai**          | 2102954    | Docker                      | [@singthaitan](https://github.com/singthaitan)       |
 
 ## Quickstart Steps
-1. Start the Docker-Compose Stack using `npm run up`
+1. Start the Docker-Compose Stack using `docker compose up`
+   -    Docker will start building the images in a shared container if this is your first setup
+   -    Be mindful that the build time is relatively long (~8mins for image-service, ~10mins total)
    -    This will start the frontend, gateway, user-service and image-service
-   -    The frontend will be available at `localhost:3000`
+   -    The frontend will be available at `localhost` (HTTP - port 80)
    -    The gateway will be available at `localhost:8080`, and acts as a internal proxy for the other api services on ports `50051` and `50052`
 
 ## Running the services manually
