@@ -1,9 +1,6 @@
 # Use an official Python runtime as a parent image
-<<<<<<< Updated upstream
 FROM python:3.9-bullseye
-=======
-FROM python:3.9.16-slim-bullseye
->>>>>>> Stashed changes
+
 
 # Set the working directory to /app
 WORKDIR /app
