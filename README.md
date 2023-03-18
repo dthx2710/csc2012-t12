@@ -1,5 +1,6 @@
-# Smart Recycling
-CSC2012 T12 Project - Smart recycling with Cloud native microservices - Decoupling Language-Agnostic API Services with Fail-Safe Redundancy and Horizontal Scalablility
+# CSC2012 T12 Project
+## Cloud Native and Computer Vision Approach to Recycling
+Decoupling Language-Agnostic API Microservices with Fail-Safe Redundancy and Horizontal Scalablility
 
 ## Introduction
 This project is a full-stack system that allows users to recycle items for reward points. For this prototype, we are using a physical web camera to detect the items that the user wants to recycle. We are using computer vision to detect the items, and we are using a machine learning model to classify the items into different categories, such as cans, plastic and paper. The user can also view their profile, and view their reward points and items that they have recycled. The user can then redeem the reward points for items in the store.
@@ -43,6 +44,7 @@ gRPC (HTTP/2) is used to communicate between the services, and we are using gRPC
 2. Configure the environment variables in the `route-map.env` file
 3. In the `IMAGE_SERVICE_URL` variable, replace `image-service:50052` with your local IP address `{ip}:50052`,
    if you are running the image-service locally (Windows only)
+   - e.g. `IMAGE_SERVICE_URL=192.168.1.142:50052`
 4. Start the program with the following steps:
    - **Windows**:
       1.   `npm run init` (This will install the required dependencies)
