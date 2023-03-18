@@ -17,37 +17,38 @@ const App = () => {
   // user data global state
   const [user, setUser] = useState(null);
   const [sessionPassword, setSessionPassword] = useState(null);
-  const [recycleInterval, setRecycleInterval] = useState(null);
 
   // if loggedIn is true
   // axios get request to /recycle every 1 second, if success set cooldown of 5 seconds and add rewards
-  // if fail, do nothing
-
-  const startRecycleInterval = () => {
-    const intervalId = setInterval(async () => {
-      const status = await pollRecycle();
-      if (status) {
-        clearInterval(intervalId);
-        setTimeout(() => {
-          startRecycleInterval();
-        }, 5000);
-      }
-    }, 1000);
-    setRecycleInterval(intervalId);
+  // if fail = image-service is down, try again in 30 seconds
+  const startRecycleInterval = async () => {
+    const status = await pollRecycle();
+    if (status === 1) {
+      setTimeout(() => {
+        startRecycleInterval();
+      }, 5000);
+    }
+    else if(status === -1){
+      console.log("Trying again in 30 seconds")
+      setTimeout(() => {
+        startRecycleInterval();
+      }, 30000);
+    }
+    else if (status === 0) {
+      setTimeout(() => {
+        startRecycleInterval();
+      }, 1000);
+    }
   };
 
   useEffect(() => {
-    clearInterval(recycleInterval);
     if (user) {
       startRecycleInterval();
-    } else {
-      clearInterval(recycleInterval);
     }
-    return () => clearInterval(recycleInterval);
   }, [user?.id]);
 
   const pollRecycle = async () => {
-    let status = false;
+    let status = 0;
     await axios.get("/api/recycle/" + user.id).then((res) => {
       if (res.data.status === true) {
         // can = 75 points, bottle = 125 points, paper = 25 points
@@ -82,8 +83,11 @@ const App = () => {
             rewardPoint +
             " points"
         );
-        status = true;
+        status = 1;
       }
+    }).catch((err) => {
+      console.log("Error: image-service is unavailable");
+      status = -1;
     });
     return status;
   };
