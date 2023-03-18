@@ -1,0 +1,18 @@
+# install the deployment and service
+kubectl apply -f kube.yaml
+
+# see deployments
+kubectl get deployment
+
+# see services
+kubectl get service
+
+# nodeport config (do this for the other services as well)
+kubectl expose deployment frontend-deployment --type=NodePort --port=80
+
+# find your minikube ip
+minikube ip
+
+# access your minukube deployed app at
+http://{minikube ip}:80
+
