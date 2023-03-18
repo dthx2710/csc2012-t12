@@ -27,14 +27,12 @@ const App = () => {
       setTimeout(() => {
         startRecycleInterval();
       }, 5000);
-    }
-    else if(status === -1){
-      console.log("Trying again in 30 seconds")
+    } else if (status === -1) {
+      console.log("Trying again in 30 seconds");
       setTimeout(() => {
         startRecycleInterval();
       }, 30000);
-    }
-    else if (status === 0) {
+    } else if (status === 0) {
       setTimeout(() => {
         startRecycleInterval();
       }, 1000);
@@ -49,46 +47,49 @@ const App = () => {
 
   const pollRecycle = async () => {
     let status = 0;
-    await axios.get("/api/recycle/" + user.id).then((res) => {
-      if (res.data.status === true) {
-        // can = 75 points, bottle = 125 points, paper = 25 points
-        const rewardMap = {
-          can: 75,
-          plastic: 125,
-          paper: 25,
-          nothing: 0,
-        };
-        const rewardPoint = rewardMap[res.data.type];
-        // add reward points
-        // post request to /api/point/{id} to add points
-        axios.post("/api/point/" + user.id, { points_change: rewardPoint });
+    await axios
+      .get("/api/recycle/" + user.id, { timeout: 100 })
+      .then((res) => {
+        if (res.data.status === true) {
+          // can = 75 points, bottle = 125 points, paper = 25 points
+          const rewardMap = {
+            can: 75,
+            plastic: 125,
+            paper: 25,
+            nothing: 0,
+          };
+          const rewardPoint = rewardMap[res.data.type];
+          // add reward points
+          // post request to /api/point/{id} to add points
+          axios.post("/api/point/" + user.id, { points_change: rewardPoint });
 
-        console.log("Recycled: ", res.data.type);
-        console.log("Points added: ", rewardPoint);
+          console.log("Recycled: ", res.data.type);
+          console.log("Points added: ", rewardPoint);
 
-        // update user data
-        // setUser({ ...user, points: user.points + rewardPoint, lifetimePoints: user.lifetimePoints + rewardPoint })
-        axios.get("/api/user/" + user.id).then((res) => {
-          setUser({
-            ...user,
-            points: res.data.points,
-            lifetimePoints: res.data.lifetimePoints,
+          // update user data
+          // setUser({ ...user, points: user.points + rewardPoint, lifetimePoints: user.lifetimePoints + rewardPoint })
+          axios.get("/api/user/" + user.id).then((res) => {
+            setUser({
+              ...user,
+              points: res.data.points,
+              lifetimePoints: res.data.lifetimePoints,
+            });
           });
-        });
-        // log on window
-        alert(
-          "You recycled a " +
-            res.data.type +
-            " and earned " +
-            rewardPoint +
-            " points"
-        );
-        status = 1;
-      }
-    }).catch((err) => {
-      console.log("Error: image-service is unavailable");
-      status = -1;
-    });
+          // log on window
+          alert(
+            "You recycled a " +
+              res.data.type +
+              " and earned " +
+              rewardPoint +
+              " points"
+          );
+          status = 1;
+        }
+      })
+      .catch((err) => {
+        console.log("Error: image-service is unavailable");
+        status = -1;
+      });
     return status;
   };
 
