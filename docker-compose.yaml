@@ -31,7 +31,7 @@ services:
     env_file:
       - route-map.env
     devices:
-      - /dev/video0:/dev/video0
+      - /dev/bus/usb:/dev/bus/usb
 
   # db:
   #   image: postgres
