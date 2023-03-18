@@ -45,7 +45,8 @@ gRPC (HTTP/2) is used to communicate between the services, and we are using gRPC
 3. In the `IMAGE_SERVICE_URL` variable, replace `image-service:50052` with your local IP address `{ip}:50052`,
    if you are running the image-service locally (Windows only)
    - e.g. `IMAGE_SERVICE_URL=192.168.1.142:50052`
-4. Start the program with the following steps:
+4. Start Docker
+5. Start the program with the following steps:
    - **Windows**:
       1.   `npm run init` (This will install the required dependencies)
       2.   `npm run build` (This will build the docker images for the frontend, gateway, user-service)
@@ -55,7 +56,7 @@ gRPC (HTTP/2) is used to communicate between the services, and we are using gRPC
       4. `npm run build-linux`
       5. `npm run up-linux`
       The image-service will be started in a docker container and will use your webcam feed
-5. With this, the Docker-Compose Stack will be up and running
+6. With this, the Docker-Compose Stack will be up and running
    -    Be mindful that the build time is relatively long
    -    The frontend will be available at `localhost` or wherever you are hosting/deploying this on (HTTP - port 80)
    -    The gateway will be available at `localhost:8080`, and acts as a internal proxy for the other api services on ports `50051` and `50052`
