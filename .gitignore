@@ -16,6 +16,7 @@ jspm_packages/
 # dotenv environment variables file
 .env
 .env.test
+*.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -36,3 +37,5 @@ key.pem
 cert.pem
 k8s/secrets.yaml
 k8s/secrets*.yaml
+
+venv/

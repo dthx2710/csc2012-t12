@@ -4,7 +4,11 @@
   "description": "CSC2012 Project Repository",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "up": "docker-compose up -d"
+    "init": "cd image-service && npm run init",
+    "up": "docker-compose up -d && cd image-service && npm run activate && npm run start",
+    "build": "docker-compose build --no-cache",
+    "up-linux": "docker-compose -f docker-compose-linux.yml up",
+    "build-linux": "docker-compose -f docker-compose-linux.yml build --no-cache"
   },
   "repository": {
     "type": "git",

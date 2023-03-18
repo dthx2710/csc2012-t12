@@ -7,6 +7,7 @@ services:
       - "8080:8080"
     depends_on:
       - user-service
+      - image-service
     networks:
       - app-network
     env_file:
@@ -20,6 +21,17 @@ services:
       - app-network
     env_file:
       - route-map.env
+
+  image-service:
+    build: ./image-service
+    ports:
+      - "50052:50052"
+    networks:
+      - app-network
+    env_file:
+      - route-map.env
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
 
   frontend:
     build: ./frontend

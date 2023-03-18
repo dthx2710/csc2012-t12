@@ -4,14 +4,17 @@ import os
 from dotenv import load_dotenv
 import image_service_pb2
 import image_service_pb2_grpc
+import socket
 
 # Load environment variables from .env file
 load_dotenv()
 
 
 # Access environment variables
-service_url = os.getenv("IMAGE_SERVICE_URL")
-service_port = os.getenv("IMAGE_SERVICE_URL").split(":")[1]
+# service_url = os.getenv("IMAGE_SERVICE_URL")
+# service_port = service_url.split(":")[1]
+service_url = socket.gethostbyname(socket.gethostname()) + ":50052"
+service_port = service_url.split(":")[1]
 
 paperDetected = False
 plasticDetected = False
