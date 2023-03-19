@@ -42,7 +42,6 @@ class ImageServicer(image_service_pb2_grpc.ImageServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     image_service_pb2_grpc.add_ImageServicer_to_server(ImageServicer(), server)
-    print('Service URL: ' + service_url)
     print('Starting server. Listening on port ' + service_port)
     server.add_insecure_port(service_url)
     server.start()
