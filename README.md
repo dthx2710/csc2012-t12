@@ -2,17 +2,6 @@
 ## Cloud Native and Computer Vision Approach to Recycling
 Decoupling Language-Agnostic API Microservices with Fail-Safe Redundancy and Horizontal Scalablility
 
-## Introduction
-This project is a full-stack system that allows users to recycle items for reward points. For this prototype, we are using a physical web camera to detect the items that the user wants to recycle. We are using computer vision to detect the items, and we are using a machine learning model to classify the items into different categories, such as cans, plastic and paper. The user can also view their profile, and view their reward points and items that they have recycled. The user can then redeem the reward points for items in the store.
-
-## Implementation
-
-The web application is built using a microservices architecture, with the frontend, gateway, user-service and image-service being separate services. The frontend is built using ReactJS, the gateway is built using gRPC, the user-service is built using NodeJS and the image-service is built using Python. The services are containerized using Docker and are orchestrated using Docker-Compose.
-
-We are using an alternative to Kubernetes for this project, which is minikube. We are using minikube to run the services in a Kubernetes cluster, and we are using the NGINX Ingress Controller to route the traffic to the services. We are also using a NGINX reverse proxy to route the traffic to the frontend and gateway.
-
-gRPC (HTTP/2) is used to communicate between the services, and we are using gRPC Gateway to expose the gRPC services as RESTful APIs. The benefit of using gRPC is that it is a high-performance, open-source universal RPC framework. It uses HTTP/2 for transport, which is faster than HTTP/1.1. It also uses Protocol Buffers as the interface description language, which allows us to define our services using a simple `.proto` file. This allows us to generate client and server code in any language we want. Using gRPC Gateway allows us to use the same `.proto` file to generate the RESTful APIs. This allows us to have a single source of truth for our API, and we can generate the client code for the frontend and gateway using the same `.proto` file.
-
 ## Team12 Members
 | Name                   | Student ID | Role                        | Github                                               |
 | ---------------------- | ---------- | --------------------------- | ---------------------------------------------------- |
@@ -22,6 +11,15 @@ gRPC (HTTP/2) is used to communicate between the services, and we are using gRPC
 | **XiangHui**          | 2101993    | Computer Vision Developer   | [@XiangHui556](https://github.com/XiangHui556)       |
 | **Xun Thong**          | 2102436    | Frontend Developer          | [@xunthongkkkkkk](https://github.com/xunthongkkkkkk) |
 | **Sing Thai**          | 2102954    | Docker                      | [@singthaitan](https://github.com/singthaitan)       |
+
+## Introduction
+This project offers a complete solution that enables users to earn reward points by recycling items. The prototype employs computer vision to detect the items via a physical web camera, and a machine learning model to classify them into various categories, such as plastic, paper, and cans. Users can view their profile, reward points, and recycled items, and redeem their points for items in the store.
+
+## Implementation
+
+The system is designed as a microservices architecture, with distinct services for the frontend, gateway, user-service, and image-service. ReactJS, gRPC, NodeJS, and Python are used to develop these services, respectively, and they are containerized with Docker and orchestrated with Docker-Compose.
+
+Instead of Kubernetes, the project uses minikube to operate the services in a local Kubernetes cluster. To route the traffic to the services, NGINX Ingress Controller is utilized. Meanwhile, NGINX reverse proxy routes the traffic to the frontend and gateway. gRPC (HTTP/2) is employed for communication between services, and gRPC Gateway is used to expose the gRPC services as RESTful APIs. gRPC is advantageous because it is an efficient, open-source universal RPC framework that utilizes HTTP/2 for transportation and Protocol Buffers as the interface description language. This allows for generating client and server code in any language from a simple .proto file, which is also used to generate the RESTful APIs. The system uses a single source of truth for the API, and client code for the frontend and gateway can be generated from the same .proto file.
 
 ## Requirements:
 - A machine running Windows or Linux operating system
