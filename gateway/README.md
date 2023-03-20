@@ -4,7 +4,7 @@
 - Open terminal in this folder
 - Run the following command in gateway directory
 ```
-docker build -t gateway -f ./Dockerfile ../gateway/src
+docker build -t gateway -f ./Dockerfile ../gateway
 ```
 - Run the following command to start the container
 ```
