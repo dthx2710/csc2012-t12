@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: user-service
+  name: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: user-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\ProgramData\chocolatey\lib\kubernetes-kompose\tools\kompose.exe convert
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/csc2012-t12-app-network: "true"
+        io.kompose.service: user-service
+    spec:
+      containers:
+        - env:
+            - name: FRONTEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: FRONTEND_URL
+                  name: route-map-env
+            - name: IMAGE_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: IMAGE_SERVICE_URL
+                  name: route-map-env
+            - name: USER_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: USER_SERVICE_URL
+                  name: route-map-env
+            - name: VITE_GATEWAY_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: VITE_GATEWAY_URL
+                  name: route-map-env
+          image: user-service
+          name: user-service
+          ports:
+            - containerPort: 50051
+          imagePullPolicy: IfNotPresent
+          resources: {}
+      restartPolicy: Always
+status: {}

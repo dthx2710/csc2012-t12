@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: null
+  name: csc2012-t12-app-network
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              io.kompose.network/csc2012-t12-app-network: "true"
+  podSelector:
+    matchLabels:
+      io.kompose.network/csc2012-t12-app-network: "true"

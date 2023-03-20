@@ -1,6 +1,3 @@
-# install the deployment and service
-kubectl apply -f kube.yaml
-
 # see deployments
 kubectl get deployment
 
@@ -16,3 +13,52 @@ minikube ip
 # access your minukube deployed app at
 http://{minikube ip}:80
 
+# create kube secrets
+kubectl create secret docker-registry my-registry-secret --docker-username=<your-username> --docker-password=<your-password> (optional)\ --docker-email=singthaitan@gmail.com
+
+# delete all pods, services and deployment to clean out space
+kubectl delete pods,svc,deployments --all -n default
+
+----------------------------------------------------------------------------------------------------------------
+# start minikube with the docker driver
+minikube start --driver=docker
+
+# Set the environment variables to point Minikube to the Docker daemon running on your host machine:
+# Now any ‘docker’ command you run in this current terminal will run against the docker inside minikube cluster.
+& minikube -p minikube docker-env --shell powershell | Invoke-Expression
+
+# convert compose file with Kompose
+Kompose convert
+
+
+#build the front end on minikube vm daemon
+docker build -t frontend ./frontend
+
+# build the gateway on minikube vm daemon
+docker build -t gateway -f ./gateway/Dockerfile ./gateway
+
+# build the user-service on minikube vm daemon
+docker build -t user-service ./user-service
+
+# see error message
+kubectl describe pods <pod_name>
+
+list of yaml file created:
+INFO Kubernetes file "frontend-service.yaml" created
+INFO Kubernetes file "gateway-service.yaml" created
+INFO Kubernetes file "user-service-service.yaml" created
+INFO Kubernetes file "frontend-deployment.yaml" created
+INFO Kubernetes file "route-map-env-configmap.yaml" created
+INFO Kubernetes file "csc2012-t12-app-network-networkpolicy.yaml" created
+INFO Kubernetes file "gateway-deployment.yaml" created
+INFO Kubernetes file "user-service-deployment.yaml" created
+
+# add imagePullPolicy: IfNotPresent after the ports in every deployment. In this case I have done it and pushed onto github
+# use this for every yaml created, you can even string them all together separated by commas:
+kubectl apply -f <file_name>.yaml
+
+# expose the frontend
+kubectl expose deployment frontend --type=NodePort --port=80
+
+# generate a one time use url
+minikube service frontend --url
