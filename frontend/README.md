@@ -7,7 +7,7 @@ docker build -t frontend .
 ```
 - Run the following to start the docker for front end
 ``` 
-docker run -d -p 3000:3000 --name frontend_docker frontend
+docker run -d -p 80:80 --name frontend_docker frontend
 ```
 - Run the following to ensure that service ```frontend_docker``` is running
 ```
