@@ -12,6 +12,7 @@ services:
     env_file:
       - route-map.env
 
+
   user-service:
     build: ./user-service
     ports:
@@ -20,6 +21,7 @@ services:
       - app-network
     env_file:
       - route-map.env
+
 
   frontend:
     build: ./frontend
@@ -32,6 +34,7 @@ services:
     env_file:
       - route-map.env
     restart: always
+
 
 networks:
   app-network:
