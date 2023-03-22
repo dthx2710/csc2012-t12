@@ -60,6 +60,14 @@ Instead of Kubernetes, the project uses **minikube** to operate the services in 
    -    The gateway will be available at `localhost:8080`, and acts as a internal proxy for the other api services on ports `50051` and `50052`
    -    We have an NGINX reverse proxy running on port `80` to route the traffic to the frontend and gateway
 
+## Software Architecture
+![PSD2 Architecture](https://user-images.githubusercontent.com/37941268/226952567-780f9650-bd3c-4b25-b1f4-0aea1f810d37.png)
+![t12_microservice_architecture](https://user-images.githubusercontent.com/37941268/226951794-c77b330f-062a-4ee5-b8a0-78db40c860a4.png)
+
+## Presentation Video
+![Youtube Link](https://www.youtube.com/watch?v=_owq4fojQAE)
+
+
 ## Developer Additions
 
 ## Running the services manually
